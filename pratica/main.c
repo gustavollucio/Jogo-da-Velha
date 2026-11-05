@@ -25,16 +25,28 @@ void printBoard() {
     }
 }
 
+bool checkWin() {
+    for (int i = 0; i < 3; i++) {
+        if (v[i][0] == v[i][1] && v[i][1] == v[i][2]) return true;
+        if (v[0][i] == v[1][i] && v[1][i] == v[2][i]) return true;
+    }
+    if (v[0][0] == v[1][1] && v[1][1] == v[2][2]) return true;
+    if (v[0][2] == v[1][1] && v[1][1] == v[2][0]) return true;
+
+    return false;
+}
+
 int main() {
     int count = 0;
     int position;
     int currentPlayer = 1;
     char symbol;
     bool validPosition;
+    bool victory = false;
 
     startGame();
 
-    while (count < 9) {
+    do {
         printBoard();
 
         symbol = (currentPlayer == 1) ? 'X' : 'O';
@@ -60,8 +72,13 @@ int main() {
             }
         } while (!validPosition);
 
-        currentPlayer = (currentPlayer == 1) ? 2 : 1;
-    }
+        victory = checkWin();
+
+        if (!victory && count < 9) {
+            currentPlayer = (currentPlayer == 1) ? 2 : 1;
+        }
+
+    }while (!victory && count < 9);
 
     printBoard();
     return 0;
