@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 char v[3][3];
 
@@ -47,6 +48,11 @@ int main() {
     startGame();
 
     do {
+        system("cls");
+
+        printf("Jogador numero 1 = X \n");
+        printf("Jogador numero 2 = O \n\n");
+
         printBoard();
 
         symbol = (currentPlayer == 1) ? 'X' : 'O';
@@ -80,6 +86,17 @@ int main() {
 
     }while (!victory && count < 9);
 
+    system("cls");
+    printf("Jogador numero 1 = X \n");
+    printf("Jogador numero 2 = O \n\n");
     printBoard();
+
+    if (victory) {
+        printf("\nJOGADOR %d VENCEU!\n", currentPlayer);
+    } else {
+        printf("\nEMPATE\n");
+    }
+
+    printf("JOGO FINALIZADO\n");
     return 0;
 }
